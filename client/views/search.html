@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <link href="../css/bootstrap.css" rel="stylesheet">
+    </head>
+    <div class="search-header">
+        <div class="container">
+            <br><br>
+            <form>
+                <center><h2 class="v-center">Search for your favourite Artist</h2></center>
+                <br>
+                <div class="input-group">
+                    <input type="text" ng-model="showartist" placeholder="Artist Name" class="form-control input-md"/>
+                    <span class="input-group-btn">
+                        <button
+                                type="button"
+                                class="btn btn-md btn-primary pull-right"
+                                ng-click="searchShow()">Search</button>
+                    </span>
+                </div>
+            </form>
+            <div class="row" ng-if="display">
+                <div class="col-xs-12" ng-repeat="item in display.artists.items">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" >
+                            <div class="panel-title" >
+                                <div class="row" >
+                                    <div class="col-xs-3 col-sm-3">
+                                        <div class="results-block">
+                                            <center><h3>{{item.name}}</h3></center>
+                                            <div ng-if="item.images">
+                                                <center><img ng-src="{{item.images[1].url || artist_image}}" width="210" height="295"/></center>
+                                                <p><center><font class="text-primary" size="3" ng-repeat="genr in item.genres">
+                                                    {{genr}} {{$last ? '' : '| '}}
+                                                    </font></center></p>
+                                            </div><br>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br><br><br><br><br>
+                                    <div class="col-xs-3 col-sm-9">
+                                        <div class="col-md-12">
+                                            <div><center><button ng-click="showDetails(item.id, item.images[1].url)" class="btn btn-primary" >Details</button></center></div>   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-if="album_details">
+                <div class="col-xs-12" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading" >
+                            <div class="panel-title" >
+                                <div class="row" >
+                                    <div class="col-xs-3 col-sm-3">
+                                        <div class="results-block">
+                                            <div ng-if="img">
+                                                <center><h3>{{album_details.items[0].artists[0].name}}</h3>
+                                                    <img ng-src = "{{img || album_image}}"  width="210" height="295"/></center>
+                                            </div><br>
+                                        </div>
+                                    </div>
+                                    <br><br><br><br><br><br><br><br>
+                                    <div class="col-xs-3 col-sm-9">
+                                        <div class="col-md-12">
+                                            <h3 class="text-primary">Albums</h3>
+                                            <hr size="3">
+                                            <div ng-repeat="alb in album_details.items">
+                                                &thinsp;&thinsp;<img class="img-rounded" ng-src="{{alb.images[1].url || album_image}}" width="100" height="100"/> &thinsp;&thinsp; {{alb.name}}><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
